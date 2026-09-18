@@ -379,6 +379,7 @@
       <div class="field" style="margin-top:24px;">
         <label>Mortgage LTV at handover</label>
         <div class="prefix-input"><span>%</span><input type="number" id="f_ltv" value="${prefill.ltv||80}"></div>
+        ${prefill.isSecondProperty ? `<div class="hint">Defaulted to 60% — as a second property this is treated as an investment purchase, which UAE banks cap lower than an owner-occupied first home (typically ~80%). This applies whether or not the first mortgage is settled; what settlement affects is your debt-burden ratio, not this LTV ceiling.</div>` : ''}
       </div>
     `;
 
@@ -618,7 +619,7 @@
       state.scenario='offplan';
       document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.scenario==='offplan'));
       pendingChainSource = lastIndex;
-      renderOffplanInputs({ price: suggestedPrice, down:40, years:3, rate:14, ltv:80, appMode:'rate' });
+      renderOffplanInputs({ price: suggestedPrice, down:40, years:3, rate:14, ltv:60, appMode:'rate', isSecondProperty:true });
       compute();
       document.getElementById('inputPanel').scrollIntoView({behavior:'smooth', block:'center'});
     };
